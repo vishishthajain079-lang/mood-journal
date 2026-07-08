@@ -1,13 +1,16 @@
 const moodButtons = document.querySelectorAll(".moodButton");
 const feelingsBox = document.getElementById("feelings");
 const saveButton = document.getElementById("saveButton");
-const allowButton = document.getElementById("allowButton");
 const quoteButton = document.getElementById("quoteButton");
 const message = document.getElementById("message");
 
+const quotePopup = document.getElementById("quotePopup");
+const popupQuote = document.getElementById("popupQuote");
+const popupImage = document.getElementById("popupImage");
+const closePopup = document.getElementById("closePopup");
+
 let chosenMood = "";
 
-// Each mood has many quotes now.
 const moodInfo = {
   happy: {
     quotes: [
@@ -46,10 +49,15 @@ const moodInfo = {
   }
 };
 
-// This wakes up the notification helper.
-navigator.serviceWorker.register("./sw.js");
+const savedEntry = localStorage.getItem("latestMoodEntry");
 
-// When someone clicks a mood button.
+if (savedEntry) {
+  const oldEntry = JSON.parse(savedEntry);
+  chosenMood = oldEntry.mood;
+  feelingsBox.value = oldEntry.feelings;
+  message.textContent = "Welcome back. Your last mood was: " + oldEntry.mood;
+}
+
 moodButtons.forEach((button) => {
   button.addEventListener("click", () => {
     chosenMood = button.dataset.mood;
@@ -57,7 +65,6 @@ moodButtons.forEach((button) => {
   });
 });
 
-// Save mood and note on this computer.
 saveButton.addEventListener("click", () => {
   if (chosenMood === "") {
     message.textContent = "Please choose a mood first.";
@@ -71,45 +78,33 @@ saveButton.addEventListener("click", () => {
   };
 
   localStorage.setItem("latestMoodEntry", JSON.stringify(journalEntry));
-
   message.textContent = "Your mood and note are saved.";
 });
 
-// Ask browser permission for notifications.
-allowButton.addEventListener("click", async () => {
-  const answer = await Notification.requestPermission();
-
-  if (answer === "granted") {
-    message.textContent = "Kind reminders are allowed.";
-  } else {
-    message.textContent = "Notifications are not allowed yet.";
-  }
-});
-
-// Show one random quote for the chosen mood.
-quoteButton.addEventListener("click", async () => {
+quoteButton.addEventListener("click", () => {
   if (chosenMood === "") {
     message.textContent = "Choose a mood first.";
     return;
   }
 
-  if (Notification.permission !== "granted") {
-    message.textContent = "First click Allow kind reminders.";
-    return;
-  }
-
-  const helper = await navigator.serviceWorker.ready;
   const chosenInfo = moodInfo[chosenMood];
 
-  // Pick one random quote from the chosen mood.
   const randomNumber = Math.floor(
     Math.random() * chosenInfo.quotes.length
   );
 
-  const randomQuote = chosenInfo.quotes[randomNumber];
+  popupQuote.textContent = chosenInfo.quotes[randomNumber];
+  popupImage.src = chosenInfo.icon;
 
-  helper.showNotification("A little note for you", {
-    body: randomQuote,
-    icon: chosenInfo.icon
-  });
+  quotePopup.style.display = "flex";
+});
+
+closePopup.addEventListener("click", () => {
+  quotePopup.style.display = "none";
+});
+
+quotePopup.addEventListener("click", (event) => {
+  if (event.target === quotePopup) {
+    quotePopup.style.display = "none";
+  }
 });
