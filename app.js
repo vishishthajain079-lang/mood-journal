@@ -1,108 +1,89 @@
-```javascript
 const quotes = {
 
     happy: [
         "Keep smiling! Your happiness makes the world brighter 🌸",
-        "Happiness looks beautiful on you ✨",
-        "A happy heart creates a happy life 💗",
-        "Enjoy the little moments, they become the best memories 🌈",
-        "Your smile can brighten someone's day ☀️"
+        "Happiness is a choice. Enjoy every moment ✨",
+        "Your smile is your superpower 💗"
     ],
-
 
     calm: [
-        "A calm mind brings peace and positive thoughts 🌿",
-        "Slow down, breathe, and enjoy the present moment 🍃",
-        "Peace begins with a peaceful mind ✨",
-        "Stay calm and trust the journey 🌸",
-        "Relax, everything will work out beautifully 💙"
+        "Stay calm and enjoy the peaceful moments 🌿",
+        "A peaceful mind creates beautiful thoughts ✨",
+        "Breathe in peace, breathe out stress 💙"
     ],
-
 
     sad: [
-        "It's okay to feel sad sometimes. Better days are coming 💙",
-        "Storms don't last forever. Keep going 🌧️",
-        "Your feelings are valid. Tomorrow is a new beginning 🌅",
-        "Small steps can lead to brighter days ✨",
-        "Remember, even the darkest night ends with sunrise 🌞"
+        "Better days are coming. Keep moving forward 💙",
+        "Every new day brings a new hope 🌈",
+        "You are stronger than your bad moments ✨"
     ],
 
-
     stressed: [
-        "Take a deep breath. You can handle everything ✨",
-        "One step at a time. You don't have to do everything at once 🌿",
-        "Believe in yourself and take a small break 💗",
-        "Your peace is more important than perfection 🌸",
-        "Relax your mind and focus on what you can control 🌈"
+        "Take a deep breath. You can do this 🌸",
+        "One step at a time. Everything will be okay 💗",
+        "Relax your mind and believe in yourself ✨"
     ]
 
 };
 
 
-
 const images = {
 
     happy: "./icons/happy.png",
-
     calm: "./icons/calm.png",
-
     sad: "./icons/sad.png",
-
     stressed: "./icons/stressed.png"
 
 };
 
 
+let moodButtons = document.querySelectorAll(".moodButton");
 
-const moodButtons = document.querySelectorAll(".moodButton");
+let quotePopup = document.getElementById("quotePopup");
 
-const quotePopup = document.getElementById("quotePopup");
+let popupQuote = document.getElementById("popupQuote");
 
-const popupQuote = document.getElementById("popupQuote");
+let popupImage = document.getElementById("popupImage");
 
-const popupImage = document.getElementById("popupImage");
-
-const closePopup = document.getElementById("closePopup");
-
+let closePopup = document.getElementById("closePopup");
 
 
-moodButtons.forEach(button => {
 
-    button.addEventListener("click", function(){
+moodButtons.forEach(function(button){
 
-        let mood = this.dataset.mood;
+    button.onclick = function(){
 
-
-        // Picks a random quote from that mood
-        let randomQuote =
-        quotes[mood][Math.floor(Math.random() * quotes[mood].length)];
+        let mood = button.getAttribute("data-mood");
 
 
-        popupQuote.innerHTML = randomQuote;
+        let randomNumber = Math.floor(
+            Math.random() * quotes[mood].length
+        );
+
+
+        popupQuote.innerHTML = quotes[mood][randomNumber];
 
         popupImage.src = images[mood];
 
-
         quotePopup.style.display = "flex";
 
-    });
+    };
 
 });
 
 
 
-closePopup.addEventListener("click", function(){
+closePopup.onclick = function(){
 
     quotePopup.style.display = "none";
 
-});
+};
 
 
 
-document.getElementById("saveButton").addEventListener("click", function(){
+document.getElementById("saveButton").onclick = function(){
 
     document.getElementById("message").innerHTML =
     "Your mood has been saved 💗";
 
-});
-```
+};
