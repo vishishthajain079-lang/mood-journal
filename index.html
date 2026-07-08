@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mood Journal</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 25px;
+      background-color: #ffd6e7;
+    }
+
+    h1 {
+      color: #a63d67;
+    }
+
+    .moodButton {
+      padding: 10px 15px;
+      margin: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: white;
+      border: 2px solid #ff8fbd;
+      border-radius: 12px;
+    }
+
+    .moodButton:hover {
+      background-color: #ffeaf3;
+    }
+
+    .moodButton img {
+      width: 35px;
+      height: 35px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    textarea {
+      width: 300px;
+      height: 100px;
+      padding: 10px;
+      font-size: 15px;
+      background-color: white;
+      border: 2px solid #ff8fbd;
+      border-radius: 10px;
+    }
+
+    #saveButton,
+    #allowButton,
+    #quoteButton {
+      padding: 10px 15px;
+      margin: 5px;
+      font-size: 15px;
+      cursor: pointer;
+      background-color: #ff8fbd;
+      border: none;
+      border-radius: 10px;
+    }
+
+    #message {
+      font-weight: bold;
+      color: #7a2c4c;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>My Mood Journal</h1>
+
+  <p>How are you feeling today?</p>
+
+  <button class="moodButton" data-mood="happy">
+    <img src="./icons/happy.png" alt="Happy drawing">
+    Happy
+  </button>
+
+  <button class="moodButton" data-mood="calm">
+    <img src="./icons/calm.png" alt="Calm drawing">
+    Calm
+  </button>
+
+  <button class="moodButton" data-mood="sad">
+    <img src="./icons/sad.png" alt="Sad drawing">
+    Sad
+  </button>
+
+  <button class="moodButton" data-mood="stressed">
+    <img src="./icons/stressed.png" alt="Stressed drawing">
+    Stressed
+  </button>
+
+  <p>Write a small note about your feelings:</p>
+
+  <textarea
+    id="feelings"
+    placeholder="Write here..."
+  ></textarea>
+
+  <br><br>
+
+  <button id="saveButton">Save my mood</button>
+
+  <br><br>
+
+  <button id="allowButton">Allow kind reminders</button>
+  <button id="quoteButton">Show my quote</button>
+
+  <p id="message"></p>
+
+  <script src="app.js"></script>
+</body>
+</html>
