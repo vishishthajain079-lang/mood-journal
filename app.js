@@ -1,110 +1,108 @@
-const moodButtons = document.querySelectorAll(".moodButton");
-const feelingsBox = document.getElementById("feelings");
-const saveButton = document.getElementById("saveButton");
-const quoteButton = document.getElementById("quoteButton");
-const message = document.getElementById("message");
+```javascript
+const quotes = {
 
-const quotePopup = document.getElementById("quotePopup");
-const popupQuote = document.getElementById("popupQuote");
-const popupImage = document.getElementById("popupImage");
-const closePopup = document.getElementById("closePopup");
-
-let chosenMood = "";
-
-const moodInfo = {
-  happy: {
-    quotes: [
-      "Keep noticing the small good moments today.",
-      "Your smile can make a small moment feel brighter.",
-      "Enjoy this feeling and carry a little of it with you."
+    happy: [
+        "Keep smiling! Your happiness makes the world brighter 🌸",
+        "Happiness looks beautiful on you ✨",
+        "A happy heart creates a happy life 💗",
+        "Enjoy the little moments, they become the best memories 🌈",
+        "Your smile can brighten someone's day ☀️"
     ],
-    icon: "./icons/happy.png"
-  },
 
-  calm: {
-    quotes: [
-      "You can carry this quiet moment with you.",
-      "A peaceful moment can be small and still matter.",
-      "You are allowed to move gently through your day."
-    ],
-    icon: "./icons/calm.png"
-  },
 
-  sad: {
-    quotes: [
-      "It is okay to have a difficult day. You deserve kindness.",
-      "You do not have to handle every feeling all at once.",
-      "A hard feeling can change; give yourself some care today."
+    calm: [
+        "A calm mind brings peace and positive thoughts 🌿",
+        "Slow down, breathe, and enjoy the present moment 🍃",
+        "Peace begins with a peaceful mind ✨",
+        "Stay calm and trust the journey 🌸",
+        "Relax, everything will work out beautifully 💙"
     ],
-    icon: "./icons/sad.png"
-  },
 
-  stressed: {
-    quotes: [
-      "One small task at a time is still progress.",
-      "You can focus on the next small step, not everything at once.",
-      "Resting for a moment can help you begin again."
+
+    sad: [
+        "It's okay to feel sad sometimes. Better days are coming 💙",
+        "Storms don't last forever. Keep going 🌧️",
+        "Your feelings are valid. Tomorrow is a new beginning 🌅",
+        "Small steps can lead to brighter days ✨",
+        "Remember, even the darkest night ends with sunrise 🌞"
     ],
-    icon: "./icons/stressed.png"
-  }
+
+
+    stressed: [
+        "Take a deep breath. You can handle everything ✨",
+        "One step at a time. You don't have to do everything at once 🌿",
+        "Believe in yourself and take a small break 💗",
+        "Your peace is more important than perfection 🌸",
+        "Relax your mind and focus on what you can control 🌈"
+    ]
+
 };
 
-const savedEntry = localStorage.getItem("latestMoodEntry");
 
-if (savedEntry) {
-  const oldEntry = JSON.parse(savedEntry);
-  chosenMood = oldEntry.mood;
-  feelingsBox.value = oldEntry.feelings;
-  message.textContent = "Welcome back. Your last mood was: " + oldEntry.mood;
-}
 
-moodButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    chosenMood = button.dataset.mood;
-    message.textContent = "You chose: " + chosenMood;
-  });
+const images = {
+
+    happy: "./icons/happy.png",
+
+    calm: "./icons/calm.png",
+
+    sad: "./icons/sad.png",
+
+    stressed: "./icons/stressed.png"
+
+};
+
+
+
+const moodButtons = document.querySelectorAll(".moodButton");
+
+const quotePopup = document.getElementById("quotePopup");
+
+const popupQuote = document.getElementById("popupQuote");
+
+const popupImage = document.getElementById("popupImage");
+
+const closePopup = document.getElementById("closePopup");
+
+
+
+moodButtons.forEach(button => {
+
+    button.addEventListener("click", function(){
+
+        let mood = this.dataset.mood;
+
+
+        // Picks a random quote from that mood
+        let randomQuote =
+        quotes[mood][Math.floor(Math.random() * quotes[mood].length)];
+
+
+        popupQuote.innerHTML = randomQuote;
+
+        popupImage.src = images[mood];
+
+
+        quotePopup.style.display = "flex";
+
+    });
+
 });
 
-saveButton.addEventListener("click", () => {
-  if (chosenMood === "") {
-    message.textContent = "Please choose a mood first.";
-    return;
-  }
 
-  const journalEntry = {
-    mood: chosenMood,
-    feelings: feelingsBox.value,
-    date: new Date().toLocaleDateString()
-  };
 
-  localStorage.setItem("latestMoodEntry", JSON.stringify(journalEntry));
-  message.textContent = "Your mood and note are saved.";
-});
+closePopup.addEventListener("click", function(){
 
-quoteButton.addEventListener("click", () => {
-  if (chosenMood === "") {
-    message.textContent = "Choose a mood first.";
-    return;
-  }
-
-  const chosenInfo = moodInfo[chosenMood];
-
-  const randomNumber = Math.floor(
-    Math.random() * chosenInfo.quotes.length
-  );
-
-  popupQuote.textContent = chosenInfo.quotes[randomNumber];
-  popupImage.src = chosenInfo.icon;
-
-  quotePopup.style.display = "flex";
-});
-
-closePopup.addEventListener("click", () => {
-  quotePopup.style.display = "none";
-});
-
-quotePopup.addEventListener("click", (event) => {
-  if (event.target === quotePopup) {
     quotePopup.style.display = "none";
-  }
+
 });
+
+
+
+document.getElementById("saveButton").addEventListener("click", function(){
+
+    document.getElementById("message").innerHTML =
+    "Your mood has been saved 💗";
+
+});
+```
