@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,8 +43,7 @@
       border-radius: 10px;
     }
 
-    #saveButton,
-    #quoteButton {
+    #saveButton {
       padding: 10px 15px;
       margin: 5px;
       font-size: 15px;
@@ -58,14 +58,16 @@
       color: #7a2c4c;
     }
 
+
     #quotePopup {
       display: none;
       position: fixed;
       inset: 0;
-      background-color: rgba(90, 30, 55, 0.35);
+      background-color: rgba(90,30,55,0.35);
       align-items: center;
       justify-content: center;
     }
+
 
     .popupBox {
       position: relative;
@@ -74,45 +76,25 @@
       background-color: #fff8fc;
       border: 4px solid #ff8fbd;
       border-radius: 28px;
-      box-shadow: 0 10px 25px rgba(100, 30, 60, 0.25);
     }
 
-    .popupBox::before {
-      content: "♥";
-      position: absolute;
-      top: -20px;
-      left: 18px;
-      font-size: 38px;
-      color: #ff8fbd;
-    }
-
-    .popupBox::after {
-      content: "♥";
-      position: absolute;
-      bottom: -20px;
-      right: 18px;
-      font-size: 38px;
-      color: #ff8fbd;
-    }
 
     .popupTitle {
-      margin-top: 0;
       color: #a63d67;
-      font-size: 20px;
     }
+
 
     .popupBox img {
       width: 80px;
       height: 80px;
-      object-fit: contain;
     }
+
 
     #popupQuote {
       font-size: 18px;
       color: #7a2c4c;
-      line-height: 1.5;
-      margin: 12px 0 18px;
     }
+
 
     #closePopup {
       padding: 9px 18px;
@@ -121,56 +103,95 @@
       color: white;
       border: none;
       border-radius: 12px;
-      font-size: 15px;
     }
+
   </style>
+
 </head>
 
+
 <body>
-  <h1>My Mood Journal</h1>
 
-  <p>How are you feeling today?</p>
 
-  <button class="moodButton" data-mood="happy">
-    <img src="./icons/happy.png" alt="Happy drawing">
-    Happy
-  </button>
+<h1>My Mood Journal</h1>
 
-  <button class="moodButton" data-mood="calm">
-    <img src="./icons/calm.png" alt="Calm drawing">
-    Calm
-  </button>
 
-  <button class="moodButton" data-mood="sad">
-    <img src="./icons/sad.png" alt="Sad drawing">
-    Sad
-  </button>
+<p>How are you feeling today?</p>
 
-  <button class="moodButton" data-mood="stressed">
-    <img src="./icons/stressed.png" alt="Stressed drawing">
-    Stressed
-  </button>
 
-  <p>Write a small note about your feelings:</p>
+<button class="moodButton" data-mood="happy">
+<img src="./icons/happy.png">
+Happy
+</button>
 
-  <textarea id="feelings" placeholder="Write here..."></textarea>
 
-  <br><br>
+<button class="moodButton" data-mood="calm">
+<img src="./icons/calm.png">
+Calm
+</button>
 
-  <button id="saveButton">Save my mood</button>
-  <button id="quoteButton">Show my quote</button>
 
-  <p id="message"></p>
+<button class="moodButton" data-mood="sad">
+<img src="./icons/sad.png">
+Sad
+</button>
 
-  <div id="quotePopup">
-    <div class="popupBox">
-      <h2 class="popupTitle">A little note for you</h2>
-      <img id="popupImage" src="" alt="Mood drawing">
-      <p id="popupQuote"></p>
-      <button id="closePopup">Close</button>
-    </div>
-  </div>
 
-  <script src="app.js"></script>
+<button class="moodButton" data-mood="stressed">
+<img src="./icons/stressed.png">
+Stressed
+</button>
+
+
+
+<p>Write a small note about your feelings:</p>
+
+
+<textarea id="feelings" placeholder="Write here..."></textarea>
+
+
+<br><br>
+
+
+<button id="saveButton">
+Save my mood
+</button>
+
+
+<p id="message"></p>
+
+
+
+<div id="quotePopup">
+
+<div class="popupBox">
+
+<h2 class="popupTitle">
+A little note for you
+</h2>
+
+
+<img id="popupImage">
+
+
+<p id="popupQuote"></p>
+
+
+<button id="closePopup">
+Close
+</button>
+
+
+</div>
+
+</div>
+
+
+
+<script src="app.js"></script>
+
+
 </body>
 </html>
+```
+
