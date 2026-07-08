@@ -25,10 +25,6 @@
       border-radius: 12px;
     }
 
-    .moodButton:hover {
-      background-color: #ffeaf3;
-    }
-
     .moodButton img {
       width: 35px;
       height: 35px;
@@ -47,7 +43,6 @@
     }
 
     #saveButton,
-    #allowButton,
     #quoteButton {
       padding: 10px 15px;
       margin: 5px;
@@ -61,6 +56,47 @@
     #message {
       font-weight: bold;
       color: #7a2c4c;
+    }
+
+    /* The dark background behind the cute popup */
+    #quotePopup {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(90, 30, 55, 0.35);
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* The white cute popup box */
+    .popupBox {
+      width: 300px;
+      padding: 25px;
+      background-color: white;
+      border: 4px solid #ff8fbd;
+      border-radius: 25px;
+      box-shadow: 0 8px 20px rgba(100, 30, 60, 0.25);
+    }
+
+    .popupBox img {
+      width: 85px;
+      height: 85px;
+      object-fit: contain;
+    }
+
+    #popupQuote {
+      font-size: 18px;
+      color: #7a2c4c;
+      line-height: 1.5;
+    }
+
+    #closePopup {
+      padding: 9px 18px;
+      cursor: pointer;
+      background-color: #ff8fbd;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
     }
   </style>
 </head>
@@ -92,23 +128,24 @@
 
   <p>Write a small note about your feelings:</p>
 
-  <textarea
-    id="feelings"
-    placeholder="Write here..."
-  ></textarea>
+  <textarea id="feelings" placeholder="Write here..."></textarea>
 
   <br><br>
 
   <button id="saveButton">Save my mood</button>
-
-  <br><br>
-
-  <button id="allowButton">Allow kind reminders</button>
   <button id="quoteButton">Show my quote</button>
 
   <p id="message"></p>
 
+  <!-- This is the cute popup. It stays hidden until Show my quote is clicked. -->
+  <div id="quotePopup">
+    <div class="popupBox">
+      <img id="popupImage" src="" alt="Mood drawing">
+      <p id="popupQuote"></p>
+      <button id="closePopup">Close</button>
+    </div>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>
-
